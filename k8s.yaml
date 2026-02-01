@@ -1,0 +1,33 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vasantha-site
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vasantha-site
+  template:
+    metadata:
+      labels:
+        app: vasantha-site
+    spec:
+      containers:
+      - name: vasantha-site
+        image: vasanthaagulla/vasantha-site:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vasantha-site
+spec:
+  type: NodePort
+  selector:
+    app: vasantha-site
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30007
