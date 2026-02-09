@@ -20,15 +20,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker Image
-      run: |
-        docker build -t vasanthaagulla/vasantha-site:latest .
+      run: docker build -t vasanthaagulla/vasantha-site:latest .
 
     - name: Push Docker Image
-      run: |
-        docker push vasanthaagulla/vasantha-site:latest
-
-    - name: Deploy to Kubernetes
-      uses: azure/k8s-deploy@v4
-      with:
-        manifests: |
-          k8s.yaml
+      run: docker push vasanthaagulla/vasantha-site:latest
